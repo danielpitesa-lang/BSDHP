@@ -6,7 +6,7 @@
 
 header("Content-Type: text/plain; charset=utf-8");
 
-$configFile = __DIR__ . "/smtp-config.php";
+$configFile = dirname(__DIR__) . "/smtp-config.php";
 
 if (!file_exists($configFile)) {
     echo "FEHLER: smtp-config.php existiert nicht in " . __DIR__;

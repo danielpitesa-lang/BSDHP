@@ -46,8 +46,13 @@ die Seite auf eine individuelle Anfrage.
    **Noch offen:** Damit Mails nicht im Spam landen, muss der Handler über
    das echte, authentifizierte Postfach senden (nicht nur PHP `mail()`):
    - `smtp-config.example.php` kopieren zu `smtp-config.php` (**nur direkt
-     im Hostinger-Dateimanager**, nicht über GitHub committen – Datei ist
-     in `.gitignore`, damit ein Deploy sie nicht überschreibt).
+     im Hostinger-Dateimanager**, nicht über GitHub committen).
+   - **Wichtig:** Die Datei muss EINE EBENE OBERHALB von `public_html`
+     liegen (im Dateimanager: "Home" → dort anlegen, nicht in
+     `public_html` hinein). Hostinger checkt `public_html` bei jedem
+     GitHub-Push frisch aus – Dateien direkt darin, die nicht in Git
+     stehen, werden dabei wieder gelöscht. Eine Ebene höher übersteht die
+     Datei jeden Deploy und ist zusätzlich nie per URL erreichbar.
    - Darin das echte Passwort von info@die-bsd.com eintragen.
    - Ohne diese Datei funktioniert das Formular trotzdem (Fallback auf
      PHP `mail()`), landet aber ggf. im Spam-Ordner.

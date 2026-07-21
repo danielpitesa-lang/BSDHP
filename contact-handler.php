@@ -8,10 +8,13 @@
  * authentifizierte Postfach nutzt das auch tatsaechlich aus.
  *
  * SETUP (einmalig, direkt auf dem Server):
- * 1. "smtp-config.example.php" als Vorlage nehmen, Kopie als
- *    "smtp-config.php" im selben Verzeichnis anlegen (im Hostinger-
- *    Dateimanager - NICHT ueber GitHub committen, siehe .gitignore).
- * 2. Darin das echte Passwort von info@die-bsd.com eintragen.
+ * 1. "smtp-config.example.php" als Vorlage nehmen.
+ * 2. Eine Kopie als "smtp-config.php" EINE EBENE OBERHALB von public_html
+ *    anlegen (im Hostinger-Dateimanager auf "Home" -> nicht in
+ *    public_html hinein, sondern daneben) - WICHTIG, sonst wird die Datei
+ *    beim naechsten GitHub-Push wieder geloescht (Hostinger checkt
+ *    public_html bei jedem Deploy frisch aus Git aus).
+ * 3. Darin das echte Passwort von info@die-bsd.com eintragen.
  *
  * Ohne smtp-config.php faellt der Handler auf PHP mail() zurueck
  * (funktioniert, aber Spam-Risiko) und meldet das im Log.
@@ -133,7 +136,11 @@ function send_via_smtp($host, $port, $user, $pass, $fromEmail, $fromName, $toEma
 }
 
 $sent = false;
-$configFile = __DIR__ . "/smtp-config.php";
+// Liegt bewusst EINE Ebene oberhalb von public_html (also ausserhalb des
+// Web-Verzeichnisses und ausserhalb des GitHub-Deployments) - so bleibt
+// die Datei erhalten, auch wenn Hostinger bei jedem Push public_html neu
+// auscheckt, und sie ist nie direkt per URL aufrufbar.
+$configFile = dirname(__DIR__) . "/smtp-config.php";
 
 if (file_exists($configFile)) {
     try {
