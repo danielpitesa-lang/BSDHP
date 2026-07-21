@@ -22,8 +22,7 @@ BSDHP-website/
 
 Adresse, Telefon, E-Mail, Handelsregister (HRB 758055, Amtsgericht Stuttgart),
 USt-IdNr. (DE308412711) und Aufsichtsbehörde (Landratsamt Ludwigsburg) wurden
-von der bestehenden Website https://www.die-bsd.de/ übernommen. Offen ist nur
-noch die Fahrlehrerlaubnis-Nummer in `impressum.html`.
+von der bestehenden Website https://www.die-bsd.de/ übernommen.
 
 Der Leistungsumfang (Kurse-Seite) deckt sowohl den privaten Führerschein
 (AM, A1, A, B, BE) als auch den beruflichen Bereich ab (C1/C1E/C/CE/D/DE,
@@ -36,14 +35,12 @@ sie automatisch aktuell.
 
 ## Wichtig vor dem Go-Live
 
-1. **Fahrlehrerlaubnis-Nummer** in `impressum.html` ergänzen (auf der alten
-   Seite nicht angegeben).
-2. **contact-handler.php**: `$to_email` (z. B. info@die-bsd.de) und
+1. **contact-handler.php**: `$to_email` (z. B. info@die-bsd.de) und
    `$from_domain` auf die echte Domain setzen.
-3. **Bilder**: Aktuell rein CSS-basiertes Design ohne echte Fotos. Sobald
+2. **Bilder**: Aktuell rein CSS-basiertes Design ohne echte Fotos. Sobald
    Fotos vom Fahrzeug/Team/Standort Gerlingen vorliegen, in `assets/img/`
    ablegen und im Hero-Bereich (`index.html`) ergänzen.
-4. Rechtstexte (Impressum/Datenschutz) sind sorgfältig erstellte Vorlagen,
+3. Rechtstexte (Impressum/Datenschutz) sind sorgfältig erstellte Vorlagen,
    aber keine Rechtsberatung – vor Veröffentlichung final prüfen lassen.
 
 ## Ins GitHub-Repo bringen
