@@ -3,51 +3,70 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BSDHP Cinema</title>
-    <meta
-      name="description"
-      content="Eine elegante Cinema-Style-Webseite für BSDHP."
-    />
+    <title>Fahrschule Premium | Ausbildungen, Preise & Anmeldung</title>
+    <meta name="description" content="Moderne Fahrschul-Website mit Kursangeboten, Preisen, Anmeldung, Impressum und Datenschutz." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="background-glow"></div>
     <header class="hero">
-      <p class="eyebrow">BSDHP • Cinema Style</p>
-      <h1>Willkommen in einer Welt aus Licht, Klang und Storytelling.</h1>
-      <p class="intro">
-        Diese erste Version der Website bringt einen modernen, filmischen Look
-        mit klarer Struktur, starken Headlines und einem luxuriösen Ambiente.
-      </p>
-      <div class="actions">
-        <a class="btn btn-primary" href="#about">Mehr erfahren</a>
-        <a class="btn btn-secondary" href="#contact">Kontakt</a>
+      <nav class="nav">
+        <a href="#kurse">Kurse</a>
+        <a href="#preise">Preise</a>
+        <a href="#anmeldung">Anmeldung</a>
+        <a href="#impressum">Impressum</a>
+      </nav>
+      <div class="hero-content">
+        <p class="eyebrow">Fahrschule Premium</p>
+        <h1>Ihre sichere Route zur Fahrerlaubnis.</h1>
+        <p>Professionelle Ausbildung, moderne Fahrzeuge und individuelle Betreuung – für Klasse B und mehr.</p>
+        <a class="btn" href="#anmeldung">Jetzt anmelden</a>
       </div>
     </header>
 
     <main>
-      <section id="about" class="panel">
-        <h2>Warum diese Vision?</h2>
-        <p>
-          Der Fokus liegt auf Atmosphäre, Kontrast und einem visuellen Stil, der
-          an die Welt des Kinos erinnert. Jede Sektion wurde bewusst so gebaut,
-          dass sie sich wie ein kurzer Trailer anfühlt: prägnant, emotional und
-          eindrucksvoll.
-        </p>
+      <section id="kurse" class="card">
+        <h2>Unsere Kurse</h2>
+        <div class="grid">
+          <article>
+            <h3>Grundausbildung</h3>
+            <p>Umfassende Theorie- und Praxisausbildung für Anfänger.</p>
+          </article>
+          <article>
+            <h3>Aufbauseminare</h3>
+            <p>Für Fahranfänger mit zusätzlichen Trainingseinheiten.</p>
+          </article>
+          <article>
+            <h3>Fahrstunden</h3>
+            <p>Flexible Terminplanung und individuelle Fahrtrainings.</p>
+          </article>
+        </div>
       </section>
 
-      <section id="contact" class="panel panel-accent">
-        <h2>Bereit für die nächste Szene?</h2>
-        <p>
-          Diese Website ist der Startpunkt für weitere Inhalte, Projekte und
-          spannende Erweiterungen.
-        </p>
+      <section id="preise" class="card">
+        <h2>Preise</h2>
+        <ul>
+          <li>Theorieunterricht: ab 180 €</li>
+          <li>Praxisstunden: ab 55 € pro Einheit</li>
+          <li>Komplettpaket: auf Anfrage</li>
+        </ul>
+      </section>
+
+      <section id="anmeldung" class="card">
+        <h2>Anmeldung</h2>
+        <p>Telefon: 01234 / 567890<br />E-Mail: info@fahrschule-premium.de</p>
+      </section>
+
+      <section id="impressum" class="card">
+        <h2>Impressum</h2>
+        <p>Fahrschule Premium<br />Musterstraße 1<br />12345 Musterstadt</p>
+      </section>
+
+      <section class="card">
+        <h2>Datenschutz</h2>
+        <p>Ihre Daten werden nur zur Abwicklung der Fahrschulausbildung verwendet und nicht an Dritte weitergegeben.</p>
       </section>
     </main>
   </body>
