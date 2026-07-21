@@ -10,7 +10,7 @@ in Gerlingen.
 BSDHP-website/
   index.html               Startseite
   kurse.html                Alle Führerscheinklassen & Weiterbildungen im Detail
-  preise-anmeldung.html     Preistabellen (B, BE, A, B196, ASF) + Anmeldeformular
+  preise-anmeldung.html     Preistabellen (B, BE, A, B196) + Anmeldeformular
   impressum.html            Impressum (mit echten Registerdaten, ein offenes Feld)
   datenschutz.html          Datenschutzerklärung (Vorlage, wenige offene Felder)
   contact-handler.php       PHP-Mail-Handler fürs Anmeldeformular (Hostinger)
@@ -30,7 +30,7 @@ BKF-Grundqualifizierung, Modul-Weiterbildung/Schlüsselzahl 95, Erste-Hilfe,
 ADR, Ladungssicherung, Feuerwehrschulungen).
 
 Die Preise-Seite enthält eigene Preistabellen für Klasse B (Basic/Premium),
-Klasse A, B196, Klasse BE und ASF. Die Werte wurden auf Basis der öffentlichen
+Klasse A, B196 und Klasse BE. Die Werte wurden auf Basis der öffentlichen
 Preisliste eines Wettbewerbers in Gerlingen (Stand 01.04.2026) errechnet,
 jeweils 10 % darunter. Diese Kalkulation berücksichtigt keine eigenen Kosten
 oder Margen – bitte vor Veröffentlichung selbst gegenprüfen, ob die Preise
