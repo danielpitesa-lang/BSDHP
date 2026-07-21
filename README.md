@@ -1,48 +1,57 @@
-# Fahrschule BSD – Website (Entwurf)
+# die BSD UG – Website (Entwurf)
 
 Statische Website (HTML/CSS/JS + optionaler PHP-Formular-Handler) im dunklen
-"Cinema"-Look für die Fahrschule die BSD UG in Leonberg.
+"Cinema"-Look (Blau/Schwarz, passend zum Logo) für die Fahrschule die BSD UG
+in Gerlingen.
 
 ## Struktur
 
 ```
 BSDHP-website/
   index.html               Startseite
-  kurse.html                Führerscheinklassen im Detail
-  preise-anmeldung.html     Preise + Anmeldeformular
-  impressum.html            Impressum (Platzhalter, siehe unten)
-  datenschutz.html          Datenschutzerklärung (Platzhalter, siehe unten)
+  kurse.html                Alle Führerscheinklassen & Weiterbildungen im Detail
+  preise-anmeldung.html     Preise (Link zur bestehenden Preisliste) + Anmeldeformular
+  impressum.html            Impressum (mit echten Registerdaten, ein offenes Feld)
+  datenschutz.html          Datenschutzerklärung (Vorlage, wenige offene Felder)
   contact-handler.php       PHP-Mail-Handler fürs Anmeldeformular (Hostinger)
   assets/css/style.css      Gesamtes Styling
   assets/js/main.js         Mobile Nav + Formular-Versand
 ```
 
+## Datenbasis
+
+Adresse, Telefon, E-Mail, Handelsregister (HRB 758055, Amtsgericht Stuttgart),
+USt-IdNr. (DE308412711) und Aufsichtsbehörde (Landratsamt Ludwigsburg) wurden
+von der bestehenden Website https://www.die-bsd.de/ übernommen. Offen ist nur
+noch die Fahrlehrerlaubnis-Nummer in `impressum.html`.
+
+Der Leistungsumfang (Kurse-Seite) deckt sowohl den privaten Führerschein
+(AM, A1, A, B, BE) als auch den beruflichen Bereich ab (C1/C1E/C/CE/D/DE,
+BKF-Grundqualifizierung, Modul-Weiterbildung/Schlüsselzahl 95, Erste-Hilfe,
+ADR, Ladungssicherung, Feuerwehrschulungen).
+
+Die Preise-Seite verlinkt bewusst auf die bestehende Preisliste unter
+https://www.die-bsd.de/preise statt eine eigene Tabelle zu pflegen – so bleibt
+sie automatisch aktuell.
+
 ## Wichtig vor dem Go-Live
 
-1. **Platzhalter ersetzen**: In `impressum.html`, `datenschutz.html` und
-   `preise-anmeldung.html` sind alle mit `[bitte ergänzen]` markierten Stellen
-   auszufüllen (Adresse, Kontakt, Registernummer, USt-ID, Preise, Fahrlehrererlaubnis-Nr.).
-   Das sind rechtlich vorgeschriebene Angaben – Vorlage ist keine Rechtsberatung,
-   bitte vor Veröffentlichung prüfen lassen.
-2. **contact-handler.php**: `$to_email` und `$from_domain` auf eure echten
-   Werte setzen.
-3. **Bilder**: Aktuell rein CSS-basiertes Design ohne echte Fotos. Sobald Fotos
-   vom Fahrzeug/Team/Standort Leonberg vorliegen, in `assets/img/` ablegen und
-   im Hero-Bereich (`index.html`) ergänzen.
+1. **Fahrlehrerlaubnis-Nummer** in `impressum.html` ergänzen (auf der alten
+   Seite nicht angegeben).
+2. **Öffnungszeiten** in `preise-anmeldung.html` ergänzen.
+3. **contact-handler.php**: `$to_email` (z. B. info@die-bsd.de) und
+   `$from_domain` auf die echte Domain setzen.
+4. **Bilder**: Aktuell rein CSS-basiertes Design ohne echte Fotos. Sobald
+   Fotos vom Fahrzeug/Team/Standort Gerlingen vorliegen, in `assets/img/`
+   ablegen und im Hero-Bereich (`index.html`) ergänzen.
+5. Rechtstexte (Impressum/Datenschutz) sind sorgfältig erstellte Vorlagen,
+   aber keine Rechtsberatung – vor Veröffentlichung final prüfen lassen.
 
 ## Ins GitHub-Repo bringen
 
-Das Repo `https://github.com/danielpitesa-lang/BSDHP.git` ist aktuell leer.
-Lokal (z. B. in deinem Terminal):
-
-```bash
-git clone https://github.com/danielpitesa-lang/BSDHP.git
-# Inhalte dieses Ordners (BSDHP-website/*) in den geklonten Ordner kopieren
-cd BSDHP
-git add .
-git commit -m "Erste Version der Website (Cinema Style)"
-git push origin main
-```
+Das Repo `https://github.com/danielpitesa-lang/BSDHP.git` wurde bereits mit
+diesem Stand aktualisiert (Root-Dateien, `assets/css/style.css`,
+`assets/js/main.js`, alte `styles.css` entfernt).
 
 ## Deployment auf Hostinger
 
