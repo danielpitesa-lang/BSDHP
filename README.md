@@ -41,9 +41,16 @@ die Seite auf eine individuelle Anfrage.
 ## Wichtig vor dem Go-Live
 
 1. ~~**contact-handler.php**: `$to_email`/`$from_domain` auf die echte
-   Domain setzen.~~ Erledigt – info@die-bsd.com / die-bsd.com. Bei Bedarf
-   SPF/DKIM für die Domain in Hostinger aktivieren, damit Mails nicht im
-   Spam landen.
+   Domain setzen.~~ Erledigt – info@die-bsd.com / die-bsd.com.
+   SPF/DKIM/DMARC sind bei Hostinger für die Domain bereits korrekt gesetzt.
+   **Noch offen:** Damit Mails nicht im Spam landen, muss der Handler über
+   das echte, authentifizierte Postfach senden (nicht nur PHP `mail()`):
+   - `smtp-config.example.php` kopieren zu `smtp-config.php` (**nur direkt
+     im Hostinger-Dateimanager**, nicht über GitHub committen – Datei ist
+     in `.gitignore`, damit ein Deploy sie nicht überschreibt).
+   - Darin das echte Passwort von info@die-bsd.com eintragen.
+   - Ohne diese Datei funktioniert das Formular trotzdem (Fallback auf
+     PHP `mail()`), landet aber ggf. im Spam-Ordner.
 2. **Bilder**: Aktuell rein CSS-basiertes Design ohne echte Fotos. Sobald
    Fotos vom Fahrzeug/Team/Standort Gerlingen vorliegen, in `assets/img/`
    ablegen und im Hero-Bereich (`index.html`) ergänzen.

@@ -1,0 +1,4 @@
+# Enthaelt das SMTP-Passwort fuer das Kontaktformular.
+# Wird NUR direkt auf dem Server (Hostinger-Dateimanager) angelegt,
+# niemals ins Repository committen!
+smtp-config.php

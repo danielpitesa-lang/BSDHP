@@ -1,13 +1,20 @@
 <?php
 /**
- * Einfache Mail-Weiterleitung für das Anmeldeformular.
- * Laeuft auf Hostinger-Shared-Hosting (PHP mail()-Funktion).
+ * Mail-Weiterleitung fuer das Anmeldeformular.
  *
- * WICHTIG vor dem Einsatz:
- * 1. $to_email auf die echte Empfaenger-Adresse der Fahrschule setzen.
- * 2. $from_domain an die eigene Domain anpassen (SPF/DKIM bei Hostinger
- *    fuer diese Domain aktivieren, sonst landen Mails im Spam).
- * 3. Optional: reCAPTCHA / Honeypot ergaenzen, um Spam zu reduzieren.
+ * Versendet per authentifiziertem SMTP (nicht PHP mail()), damit die Mails
+ * nicht im Spam landen - SPF/DKIM/DMARC bei Hostinger sind fuer die Domain
+ * bereits korrekt konfiguriert, aber nur ein Versand ueber das echte,
+ * authentifizierte Postfach nutzt das auch tatsaechlich aus.
+ *
+ * SETUP (einmalig, direkt auf dem Server):
+ * 1. "smtp-config.example.php" als Vorlage nehmen, Kopie als
+ *    "smtp-config.php" im selben Verzeichnis anlegen (im Hostinger-
+ *    Dateimanager - NICHT ueber GitHub committen, siehe .gitignore).
+ * 2. Darin das echte Passwort von info@die-bsd.com eintragen.
+ *
+ * Ohne smtp-config.php faellt der Handler auf PHP mail() zurueck
+ * (funktioniert, aber Spam-Risiko) und meldet das im Log.
  */
 
 header("Content-Type: text/plain; charset=utf-8");
@@ -25,12 +32,12 @@ function clean($value) {
     return htmlspecialchars(trim($value ?? ""), ENT_QUOTES, "UTF-8");
 }
 
-$vorname    = clean($_POST["vorname"] ?? "");
-$nachname   = clean($_POST["nachname"] ?? "");
-$email      = clean($_POST["email"] ?? "");
-$telefon    = clean($_POST["telefon"] ?? "");
-$klasse     = clean($_POST["klasse"] ?? "");
-$nachricht  = clean($_POST["nachricht"] ?? "");
+$vorname     = clean($_POST["vorname"] ?? "");
+$nachname    = clean($_POST["nachname"] ?? "");
+$email       = clean($_POST["email"] ?? "");
+$telefon     = clean($_POST["telefon"] ?? "");
+$klasse      = clean($_POST["klasse"] ?? "");
+$nachricht   = clean($_POST["nachricht"] ?? "");
 $datenschutz = isset($_POST["datenschutz"]);
 
 // Grundlegende Validierung
@@ -49,12 +56,116 @@ $body = "Neue Anfrage über das Anmeldeformular\n\n"
       . "Gewuenschte Klasse: $klasse\n"
       . "Nachricht:\n$nachricht\n";
 
-$headers   = [];
-$headers[] = "From: Website Anmeldeformular <no-reply@$from_domain>";
-$headers[] = "Reply-To: $email";
-$headers[] = "Content-Type: text/plain; charset=utf-8";
+/**
+ * Minimaler SMTP-Client ueber ein TLS-Socket (kein externes Package noetig).
+ * Wirft eine Exception bei jedem Fehler, damit der Aufrufer sauber auf
+ * mail() zurueckfallen kann.
+ */
+function send_via_smtp($host, $port, $user, $pass, $fromEmail, $fromName, $toEmail, $replyTo, $subject, $body) {
+    $timeout = 15;
+    $socket = @stream_socket_client(
+        "ssl://$host:$port",
+        $errno,
+        $errstr,
+        $timeout,
+        STREAM_CLIENT_CONNECT
+    );
+    if (!$socket) {
+        throw new Exception("SMTP-Verbindung fehlgeschlagen: $errstr ($errno)");
+    }
 
-$sent = mail($to_email, $subject, $body, implode("\r\n", $headers));
+    $read = function () use ($socket) {
+        $data = "";
+        while ($line = fgets($socket, 515)) {
+            $data .= $line;
+            if (isset($line[3]) && $line[3] === " ") break;
+        }
+        return $data;
+    };
+    $write = function ($cmd) use ($socket) {
+        fwrite($socket, $cmd . "\r\n");
+    };
+    $expect = function ($code) use ($read) {
+        $resp = $read();
+        if (substr($resp, 0, 3) !== (string) $code) {
+            throw new Exception("Unerwartete SMTP-Antwort (erwartet $code): $resp");
+        }
+        return $resp;
+    };
+
+    $expect(220);
+    $write("EHLO " . ($_SERVER["SERVER_NAME"] ?? "localhost"));
+    $expect(250);
+    $write("AUTH LOGIN");
+    $expect(334);
+    $write(base64_encode($user));
+    $expect(334);
+    $write(base64_encode($pass));
+    $expect(235);
+
+    $write("MAIL FROM:<$fromEmail>");
+    $expect(250);
+    $write("RCPT TO:<$toEmail>");
+    $expect(250);
+    $write("DATA");
+    $expect(354);
+
+    $headers = [];
+    $headers[] = "From: $fromName <$fromEmail>";
+    $headers[] = "To: <$toEmail>";
+    $headers[] = "Reply-To: <$replyTo>";
+    $headers[] = "Subject: =?UTF-8?B?" . base64_encode($subject) . "?=";
+    $headers[] = "MIME-Version: 1.0";
+    $headers[] = "Content-Type: text/plain; charset=UTF-8";
+    $headers[] = "Content-Transfer-Encoding: base64";
+    $headers[] = "Date: " . date("r");
+
+    // Dot-stuffing gemaess SMTP-Protokoll
+    $encodedBody = chunk_split(base64_encode($body));
+    $message = implode("\r\n", $headers) . "\r\n\r\n" . $encodedBody . "\r\n.";
+
+    $write($message);
+    $expect(250);
+    $write("QUIT");
+    fclose($socket);
+
+    return true;
+}
+
+$sent = false;
+$configFile = __DIR__ . "/smtp-config.php";
+
+if (file_exists($configFile)) {
+    try {
+        $cfg = require $configFile;
+        send_via_smtp(
+            $cfg["host"],
+            $cfg["port"],
+            $cfg["username"],
+            $cfg["password"],
+            $cfg["username"],
+            "Website Anmeldeformular",
+            $to_email,
+            $email,
+            $subject,
+            $body
+        );
+        $sent = true;
+    } catch (Throwable $e) {
+        error_log("SMTP-Versand fehlgeschlagen, falle auf mail() zurueck: " . $e->getMessage());
+    }
+}
+
+if (!$sent) {
+    // Fallback: einfache PHP mail() (funktioniert, aber hoeheres Spam-Risiko
+    // ohne authentifizierten SMTP-Login).
+    $headers   = [];
+    $headers[] = "From: Website Anmeldeformular <no-reply@$from_domain>";
+    $headers[] = "Reply-To: $email";
+    $headers[] = "Content-Type: text/plain; charset=utf-8";
+
+    $sent = mail($to_email, $subject, $body, implode("\r\n", $headers));
+}
 
 if ($sent) {
     http_response_code(200);
