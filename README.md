@@ -40,8 +40,10 @@ die Seite auf eine individuelle Anfrage.
 
 ## Wichtig vor dem Go-Live
 
-1. **contact-handler.php**: `$to_email` (z. B. info@die-bsd.de) und
-   `$from_domain` auf die echte Domain setzen.
+1. ~~**contact-handler.php**: `$to_email`/`$from_domain` auf die echte
+   Domain setzen.~~ Erledigt – info@die-bsd.com / die-bsd.com. Bei Bedarf
+   SPF/DKIM für die Domain in Hostinger aktivieren, damit Mails nicht im
+   Spam landen.
 2. **Bilder**: Aktuell rein CSS-basiertes Design ohne echte Fotos. Sobald
    Fotos vom Fahrzeug/Team/Standort Gerlingen vorliegen, in `assets/img/`
    ablegen und im Hero-Bereich (`index.html`) ergänzen.

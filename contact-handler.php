@@ -18,9 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     exit;
 }
 
-// TODO: bitte anpassen
-$to_email    = "info@bitte-anpassen.de";
-$from_domain = "bitte-anpassen.de";
+$to_email    = "info@die-bsd.com";
+$from_domain = "die-bsd.com";
 
 function clean($value) {
     return htmlspecialchars(trim($value ?? ""), ENT_QUOTES, "UTF-8");
