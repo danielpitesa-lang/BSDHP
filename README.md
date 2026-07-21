@@ -38,13 +38,12 @@ sie automatisch aktuell.
 
 1. **Fahrlehrerlaubnis-Nummer** in `impressum.html` ergänzen (auf der alten
    Seite nicht angegeben).
-2. **Öffnungszeiten** in `preise-anmeldung.html` ergänzen.
-3. **contact-handler.php**: `$to_email` (z. B. info@die-bsd.de) und
+2. **contact-handler.php**: `$to_email` (z. B. info@die-bsd.de) und
    `$from_domain` auf die echte Domain setzen.
-4. **Bilder**: Aktuell rein CSS-basiertes Design ohne echte Fotos. Sobald
+3. **Bilder**: Aktuell rein CSS-basiertes Design ohne echte Fotos. Sobald
    Fotos vom Fahrzeug/Team/Standort Gerlingen vorliegen, in `assets/img/`
    ablegen und im Hero-Bereich (`index.html`) ergänzen.
-5. Rechtstexte (Impressum/Datenschutz) sind sorgfältig erstellte Vorlagen,
+4. Rechtstexte (Impressum/Datenschutz) sind sorgfältig erstellte Vorlagen,
    aber keine Rechtsberatung – vor Veröffentlichung final prüfen lassen.
 
 ## Ins GitHub-Repo bringen
