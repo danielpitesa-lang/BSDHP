@@ -13,9 +13,13 @@ if (!file_exists($configFile)) {
     exit;
 }
 
+echo "Roh-Dateiinhalt (raw):\n---\n" . file_get_contents($configFile) . "\n---\n\n";
+
 $cfg = require $configFile;
-echo "Config gefunden. Host: " . $cfg["host"] . " Port: " . $cfg["port"] . " User: " . $cfg["username"] . "\n";
-echo "Passwort-Laenge: " . strlen($cfg["password"]) . " Zeichen\n\n";
+echo "var_export von \$cfg:\n";
+var_export($cfg);
+echo "\n\n";
+echo "Typ von \$cfg: " . gettype($cfg) . "\n\n";
 
 try {
     $socket = @stream_socket_client(
