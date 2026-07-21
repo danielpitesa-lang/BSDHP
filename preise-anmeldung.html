@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preise &amp; Anmeldung | Fahrschule BSD Leonberg</title>
+<meta name="description" content="Preisübersicht und Online-Anmeldung für die Fahrschule BSD in Leonberg.">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo">die BSD UG <span>Fahrschule Leonberg</span></a>
+    <nav class="nav-links">
+      <a href="index.html">Start</a>
+      <a href="kurse.html">Kurse</a>
+      <a href="preise-anmeldung.html" class="active">Preise &amp; Anmeldung</a>
+      <a href="impressum.html">Impressum</a>
+      <a href="preise-anmeldung.html#anmeldung" class="nav-cta">Jetzt anmelden</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Menü öffnen">☰</button>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" style="padding: 80px 0 60px;">
+    <div class="container">
+      <div class="hero-badge"><span class="dot"></span> Transparent &amp; fair</div>
+      <h1>Preise &amp; <span class="highlight">Anmeldung</span></h1>
+      <p class="lead">
+        Ein erster Überblick über unsere Preisstruktur sowie unser Anmeldeformular –
+        einfach ausfüllen, wir melden uns zeitnah bei dir zurück.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Preisübersicht</span>
+        <h2>Beispielhafte Preisstruktur Klasse B</h2>
+      </div>
+
+      <div class="pricing-note">
+        <strong>Hinweis:</strong> Dies sind <strong>Platzhalter-Preise</strong> zur Veranschaulichung der Struktur.
+        Bitte durch eure tatsächliche, aktuelle Preisliste ersetzen – Preisangaben unterliegen
+        gesetzlichen Vorgaben (u. a. Preisangabenverordnung) und sollten vor Veröffentlichung geprüft werden.
+      </div>
+
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>Leistung</th>
+            <th>Preis</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Grundgebühr (einmalig)</td><td class="price">XXX,00 €</td></tr>
+          <tr><td>Fahrstunde Normal (45 Min.)</td><td class="price">XX,00 €</td></tr>
+          <tr><td>Fahrstunde Überland (45 Min.)</td><td class="price">XX,00 €</td></tr>
+          <tr><td>Fahrstunde Autobahn (45 Min.)</td><td class="price">XX,00 €</td></tr>
+          <tr><td>Fahrstunde Nachtfahrt (45 Min.)</td><td class="price">XX,00 €</td></tr>
+          <tr><td>Vorstellung theoretische Prüfung</td><td class="price">XX,00 €</td></tr>
+          <tr><td>Vorstellung praktische Prüfung</td><td class="price">XX,00 €</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section-alt" id="anmeldung">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Anmeldung</span>
+        <h2>Trag dich unverbindlich ein</h2>
+        <p>Wir melden uns innerhalb von 1–2 Werktagen bei dir, um alle Details zu besprechen.</p>
+      </div>
+
+      <div class="form-layout">
+        <form class="contact-form" id="anmeldeform" method="POST" action="contact-handler.php">
+          <div class="form-row">
+            <div class="field">
+              <label for="vorname">Vorname</label>
+              <input type="text" id="vorname" name="vorname" required>
+            </div>
+            <div class="field">
+              <label for="nachname">Nachname</label>
+              <input type="text" id="nachname" name="nachname" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="email">E-Mail</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="field">
+              <label for="telefon">Telefon</label>
+              <input type="tel" id="telefon" name="telefon">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="klasse">Gewünschte Führerscheinklasse</label>
+            <select id="klasse" name="klasse">
+              <option value="AM">Klasse AM</option>
+              <option value="A1">Klasse A1</option>
+              <option value="A2">Klasse A2</option>
+              <option value="A">Klasse A</option>
+              <option value="B" selected>Klasse B</option>
+              <option value="BE">Klasse BE</option>
+              <option value="Beratung">Ich möchte mich erst beraten lassen</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="nachricht">Nachricht (optional)</label>
+            <textarea id="nachricht" name="nachricht" rows="4" placeholder="Gibt es etwas, das wir vorab wissen sollten?"></textarea>
+          </div>
+
+          <div class="field field-checkbox">
+            <input type="checkbox" id="datenschutz" name="datenschutz" required>
+            <label for="datenschutz">
+              Ich habe die <a href="datenschutz.html" style="color: var(--accent-2);">Datenschutzerklärung</a>
+              gelesen und bin mit der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage einverstanden.
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Anfrage senden</button>
+          <div class="form-status" id="form-status"></div>
+        </form>
+
+        <div class="info-panel">
+          <div class="info-item">
+            <h4>Adresse</h4>
+            <p class="placeholder-text">Straße Nr., 71229 Leonberg <span style="color: var(--accent-3); font-size: 12px;">[bitte ergänzen]</span></p>
+          </div>
+          <div class="info-item">
+            <h4>Telefon</h4>
+            <p><span style="color: var(--accent-3); font-size: 12px;">[bitte ergänzen]</span></p>
+          </div>
+          <div class="info-item">
+            <h4>E-Mail</h4>
+            <p><span style="color: var(--accent-3); font-size: 12px;">[bitte ergänzen]</span></p>
+          </div>
+          <div class="info-item">
+            <h4>Erreichbarkeit</h4>
+            <p>Mo–Fr nach Vereinbarung <span style="color: var(--accent-3); font-size: 12px;">[bitte Öffnungszeiten ergänzen]</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h5>die BSD UG (haftungsbeschränkt)</h5>
+        <p style="color: var(--text-secondary); font-size: 14.5px; max-width: 320px;">
+          Fahrschule in Leonberg. Geschäftsführung: Daniel Pitesa.
+          Fahrlehrer mit über 30 Jahren Erfahrung.
+        </p>
+      </div>
+      <div>
+        <h5>Navigation</h5>
+        <ul>
+          <li><a href="index.html">Start</a></li>
+          <li><a href="kurse.html">Kurse</a></li>
+          <li><a href="preise-anmeldung.html">Preise &amp; Anmeldung</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Rechtliches</h5>
+        <ul>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 die BSD UG (haftungsbeschränkt) – Fahrschule Leonberg</span>
+      <span>Website in Entwicklung</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
