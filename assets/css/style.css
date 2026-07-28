@@ -452,7 +452,7 @@ form.contact-form {
 /* ---------------- Footer ---------------- */
 
 .site-footer { border-top: 1px solid var(--border); padding: 56px 0 32px; background: var(--bg-alt); }
-.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+.footer-grid { display: grid; grid-template-columns: 1.3fr 0.9fr 0.9fr 0.9fr; gap: 40px; margin-bottom: 40px; }
 
 .footer-grid h5 {
   font-size: 13px;
@@ -565,6 +565,48 @@ form.contact-form {
 }
 
 .course-photo figcaption { margin-top: 12px; font-size: 13px; color: var(--text-muted); }
+
+/* ---------------- FAQ ---------------- */
+
+.faq-list { display: flex; flex-direction: column; gap: 14px; max-width: 780px; }
+
+.faq-item {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 6px 26px;
+}
+
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 0;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.faq-item summary::-webkit-details-marker { display: none; }
+
+.faq-item summary::after {
+  content: "+";
+  flex-shrink: 0;
+  color: var(--accent-2);
+  font-size: 20px;
+  font-weight: 400;
+  transition: transform 0.2s ease;
+}
+
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item p { color: var(--text-secondary); font-size: 14.5px; margin: 0 0 20px; }
+
+/* ---------------- Standorte / Service area ---------------- */
+
+.area-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+.area-links a { font-size: 13.5px; padding: 8px 14px; }
 
 /* ---------------- Responsive ---------------- */
 
