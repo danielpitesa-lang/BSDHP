@@ -1,0 +1,6 @@
+# Alte Domain die-bsd.de dauerhaft (301) auf die-bsd.com weiterleiten.
+# Betrifft nur HTTP/Website-Aufrufe - E-Mail (MX-Records) ist davon nicht betroffen.
+# Fuer die-bsd.com selbst greift diese Regel nicht (RewriteCond prueft den Host).
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^(www\.)?die-bsd\.de$ [NC]
+RewriteRule ^(.*)$ https://die-bsd.com/$1 [R=301,L]
