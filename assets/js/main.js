@@ -44,3 +44,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+
+// Urlaubs-Hinweis (blendet sich automatisch vom 03.08. bis 17.08.2026 ein, danach automatisch wieder aus)
+document.addEventListener("DOMContentLoaded", function () {
+    var urlaubStart = new Date(2026, 7, 3);
+    var urlaubEnde = new Date(2026, 7, 18);
+    var heute = new Date();
+
+                            if (heute >= urlaubStart && heute < urlaubEnde) {
+                                  var banner = document.createElement("div");
+                                  banner.className = "urlaub-banner";
+                                  banner.innerHTML = '<div class="container">Kurze Pause vom 03.08. – 17.08.: Wir tanken neue Energie, um danach wieder voll für euren Führerschein durchzustarten. Ab 18.08. sind wir wie gewohnt für euch da.</div>';
+                                  document.body.insertBefore(banner, document.body.firstChild);
+                            }
+});
