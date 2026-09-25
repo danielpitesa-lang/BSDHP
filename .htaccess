@@ -4,3 +4,9 @@
 RewriteEngine On
 RewriteCond %{HTTP_HOST} ^(www\.)?die-bsd\.de$ [NC]
 RewriteRule ^(.*)$ https://die-bsd.com/$1 [R=301,L]
+
+# Interne Dateien (Doku, Beispiel-Konfiguration, Git) nicht an Besucher ausliefern.
+<FilesMatch "^(README\.md|smtp-config\.example\.php|\.gitignore)$">
+  Require all denied
+</FilesMatch>
+RedirectMatch 404 /\.git
